@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo1001.controller.AdminDashboardController">
+    <children>
+
+        <Label layoutX="20.0" layoutY="20.0" prefHeight="60.0" prefWidth="350.0" text="Admin Dashboard">
+            <font>
+                <Font name="Arial Bold" size="36.0" />
+            </font>
+        </Label>
+
+        <Button layoutX="260.0" layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="180.0"
+                text="Manage Users" fx:id="manageUsersBtn" onAction="#navigateToManageUsers" style="-fx-font-size: 16px; -fx-background-color: #0078D7; -fx-text-fill: white;" />
+        <Button layoutX="260.0" layoutY="220.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="180.0"
+                text="Manage Files" fx:id="manageFilesBtn" onAction="#navigateToManageFiles" style="-fx-font-size: 16px; -fx-background-color: #28a745; -fx-text-fill: white;" />
+
+        <!-- MenuBar -->
+        <MenuBar layoutY="0.0" prefHeight="26.0" prefWidth="700.0" style="-fx-background-color: #444;">
+            <menus>
+                <Menu mnemonicParsing="false" text="Options" style="-fx-text-fill: white">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Logout" onAction="#handleLogout" />
+                        <MenuItem mnemonicParsing="false" text="Exit" onAction="#exitApplication" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </children>
+</AnchorPane>

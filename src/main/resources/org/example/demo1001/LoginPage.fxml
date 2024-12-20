@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.HBox?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo1001.controller.LoginPageController">
+   <children>
+      <!-- Title Label -->
+      <Label layoutX="200.0" layoutY="20.0" prefHeight="50.0" prefWidth="200.0" text="Login Page">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+
+      <!-- Username Field -->
+      <TextField fx:id="userNameField" layoutX="194.0" layoutY="100.0" prefHeight="45.0" prefWidth="227.0" promptText="Username" style="-fx-font-size: 14px; -fx-padding: 5px;"/>
+
+      <!-- Password Field -->
+      <PasswordField fx:id="passwordField" layoutX="194.0" layoutY="160.0" prefHeight="46.0" prefWidth="227.0" promptText="Password" style="-fx-font-size: 14px; -fx-padding: 5px;"/>
+
+      <!-- User Type Radio Buttons -->
+      <VBox layoutX="194.0" layoutY="220.0" spacing="10.0" alignment="CENTER_LEFT">
+         <RadioButton fx:id="viewerRadio" mnemonicParsing="false" text="Viewer" toggleGroup="$userTypeGroup"/>
+         <RadioButton fx:id="editorRadio" mnemonicParsing="false" text="Editor" toggleGroup="$userTypeGroup"/>
+         <RadioButton fx:id="adminRadio" mnemonicParsing="false" text="Admin" toggleGroup="$userTypeGroup"/>
+      </VBox>
+
+      <!-- Buttons (Login & Register) -->
+      <HBox layoutX="194.0" layoutY="300.0" spacing="20.0" alignment="CENTER">
+         <Button fx:id="loginButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="109.0" text="Login" style="-fx-font-size: 14px; -fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+         <Button fx:id="registerButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="109.0" text="Register" style="-fx-font-size: 14px; -fx-background-color: #2196F3; -fx-text-fill: white;"/>
+      </HBox>
+   </children>
+</AnchorPane>
