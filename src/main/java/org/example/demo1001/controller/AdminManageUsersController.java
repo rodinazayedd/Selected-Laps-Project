@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
     import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.example.demo1001.AccessControl.UserAccessControl;
 import org.example.demo1001.MainApplication;
 import org.example.demo1001.factory.UserFactory;
 import org.example.demo1001.model.UserRole;
@@ -354,7 +355,7 @@ public class AdminManageUsersController implements Initializable {
 
     private Boolean changeRoleEvent(String newRole, UserRole user) {
         if (!newRole.trim().isEmpty()) {
-           UserRepo.getInstance().changeRole(user, newRole);
+            UserAccessControl.getInstance().assignRole(user,newRole);
             user.setRole(newRole);
             updateUserComponentName(user);
             return true;

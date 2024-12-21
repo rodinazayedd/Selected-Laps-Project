@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.example.demo1001.AccessControl.UserAccessControl;
 import org.example.demo1001.MainApplication;
 import org.example.demo1001.factory.UserFactory;
 import org.example.demo1001.model.UserRole;
@@ -73,7 +74,7 @@ public class LoginPageController {
         // Check if the login credentials are valid
         if (UserRepo.getInstance().login(user)) {
             System.out.println("Login successful");
-            navigateToPreProcessing(user);
+            navigateTo(UserAccessControl.getInstance().PermissionPage(user.getRole().toLowerCase()));
         } else {
             showError("Username or password is incorrect.");
         }
