@@ -6,6 +6,7 @@
     import javafx.stage.Stage;
     import org.example.demo1001.model.Document;
     import org.example.demo1001.repository.DocumentRepository;
+    import org.example.demo1001.repository.SessionRepo;
 
     import java.io.IOException;
     import java.util.List;
@@ -13,6 +14,7 @@
     public class MainApplication extends Application {
         @Override
         public void start(Stage stage) throws IOException {
+            //LoginPage.fxml
             FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("LoginPage.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("Login");
@@ -22,5 +24,6 @@
 
         public static void main(String[] args) {
             launch();
+            SessionRepo.logout();
         }
     }

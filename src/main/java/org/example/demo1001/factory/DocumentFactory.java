@@ -1,5 +1,6 @@
 package org.example.demo1001.factory;
 
+import org.example.demo1001.model.DocumentBuilder;
 import org.example.demo1001.model.*;
 
 import java.io.File;
@@ -21,32 +22,15 @@ public class DocumentFactory {
 
 
     public Document createDocument(String name, String date, File file) {
-        String type = getFileType(file);
-        name = clearTypeFromName(name);
-        switch (type.toLowerCase()) {
-            case "pdf":
-                return new PDFDocument(name, type, date, file);
-            case "word":
-                return new WordDocument(name, type, date, file);
-            case "excel":
-                return new ExcelDocument(name, type, date, file);
-            default:
-                throw new IllegalArgumentException("Unsupported document type: " + type);
-        }
+        return new DocumentBuilder(clearTypeFromName(name),getFileType(file)).file(file).date(date).build();
     }
 
     public Document createDocument(String name, String date, File file,String type,int id) {
+        return new DocumentBuilder(name,type).date(date).file(file).id(id).build();
+    }
 
-        switch (type.toLowerCase()) {
-            case "pdf":
-                return new PDFDocument(id,name, type, file, date);
-            case "word":
-                return new WordDocument(id,name, type, file, date);
-            case "excel":
-                return new ExcelDocument(id,name, type, file, date);
-            default:
-                throw new IllegalArgumentException("Unsupported document type: " + type);
-        }
+    public Document createDocument(String name, String date,String type,int id,boolean isPrivate) {
+        return new DocumentBuilder(name,type).date(date).id(id).isPrivate(isPrivate).build();
     }
 
 

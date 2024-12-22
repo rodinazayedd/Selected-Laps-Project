@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import org.example.demo1001.AccessControl.UserAccessControl;
 import org.example.demo1001.MainApplication;
 import org.example.demo1001.factory.UserFactory;
-import org.example.demo1001.model.UserRole;
+import org.example.demo1001.model.User;
 import org.example.demo1001.repository.UserRepo;
 
 import java.io.IOException;
@@ -69,7 +69,7 @@ public class LoginPageController {
 
         String selectedRole = selectedRadio.getText();
         String status ="unknown";
-        UserRole user = UserFactory.getInstance().createUser(userName, password, selectedRole,status);
+        User user = UserFactory.getInstance().createUser(userName, password, selectedRole,status);
 
         // Check if the login credentials are valid
         if (UserRepo.getInstance().login(user)) {
@@ -107,7 +107,7 @@ public class LoginPageController {
         String selectedRole = selectedRadio.getText();
 
         System.out.println("in cotrl "+selectedRole);
-        UserRole user = UserFactory.getInstance().createUser(userName,password,selectedRole,status);
+        User user = UserFactory.getInstance().createUser(userName,password,selectedRole,status);
         UserRepo.getInstance().register(user);
     }
 
@@ -122,7 +122,7 @@ public class LoginPageController {
     }
 
 
-    private void navigateToPreProcessing(UserRole user){
+    private void navigateToPreProcessing(User user){
         System.out.println(user.getRole()+"-<<<<<<");
         switch (user.getRole().toLowerCase()){
             case "admin":navigateTo("AdminDashboard.fxml");

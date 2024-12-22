@@ -1,6 +1,7 @@
 package org.example.demo1001.model;
 
 
+
 import java.io.File;
 
 public abstract class Document {
@@ -9,6 +10,18 @@ public abstract class Document {
     protected String type;
     protected File file;
     protected String date;
+    protected boolean isPrivate=false;
+
+
+    //Builder
+    public Document(DocumentBuilder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.type = builder.type;
+        this.file = builder.file;
+        this.date = builder.date;
+        this.isPrivate= builder.isPrivate;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -77,5 +90,13 @@ public abstract class Document {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
     }
 }

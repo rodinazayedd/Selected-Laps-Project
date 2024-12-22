@@ -16,7 +16,11 @@ import javafx.stage.Stage;
 import org.example.demo1001.MainApplication;
 import org.example.demo1001.factory.DocumentFactory;
 import org.example.demo1001.model.Document;
+import org.example.demo1001.proxyAccessor.FileAccessor;
+import org.example.demo1001.proxyAccessor.FileAccessorProxy;
 import org.example.demo1001.repository.DocumentRepository;
+import org.example.demo1001.repository.SessionRepo;
+
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -97,16 +101,19 @@ public class ViewerViewController implements Initializable {
         openButton.setPrefWidth(Region.USE_COMPUTED_SIZE);
         openButton.setMaxWidth(Double.MAX_VALUE);
 
-        openButton.setOnAction(event -> openFile(document.getFile()));
+        openButton.setOnAction(event -> openFile(document));
         return openButton;
     }
 
 
-    private void openFile(File file) {
-        if (file != null && file.exists()) {
+    private void openFile(Document document) {
+        FileAccessor fileAccessor = new FileAccessorProxy();
+        document.setFile(fileAccessor.loadFile(document));
+
+        if (document.getFile() != null && document.getFile().exists()) {
             try {
                 Desktop desktop = Desktop.getDesktop();
-                desktop.open(file);  // Opens the file with the default application
+                desktop.open(document.getFile());  // Opens the file with the default application
             } catch (IOException e) {
                 showAlert("Error Opening File", "Unable to open the file: " + e.getMessage());
             }
@@ -116,7 +123,7 @@ public class ViewerViewController implements Initializable {
 
 
     @FXML
-    protected void onBackToLogin() {
+    protected void logout() {
         try {
             // Load the dashboard FXML file (make sure the path is correct)
             FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("LoginPage.fxml"));
@@ -129,6 +136,7 @@ public class ViewerViewController implements Initializable {
             Scene dashboardScene = new Scene(dashboardRoot);
             stage.setScene(dashboardScene);
             stage.show();
+            SessionRepo.logout();
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Error", "Could not load dashboard: " + e.getMessage());

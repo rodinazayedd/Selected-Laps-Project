@@ -1,6 +1,7 @@
 package org.example.demo1001.AccessControl;
 
-import org.example.demo1001.model.UserRole;
+import org.example.demo1001.model.User;
+import org.example.demo1001.repository.SessionRepo;
 import org.example.demo1001.repository.UserRepo;
 
 public class UserAccessControl {
@@ -31,9 +32,14 @@ public class UserAccessControl {
         return "LoginPage";
     }
 
-    public void assignRole(UserRole user, String role) {
-
+    public void assignRole(User user, String role) {
         UserRepo.getInstance().changeRole(user,role);
+    }
+    public boolean isAdmin(){
+        if("admin".equals(SessionRepo.getCurrentUser().getRole().toLowerCase())){
+            return true;
+        }
+        return false;
     }
 }
 

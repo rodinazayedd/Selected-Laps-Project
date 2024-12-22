@@ -18,7 +18,10 @@ import javafx.stage.*;
 import org.example.demo1001.MainApplication;
 import org.example.demo1001.factory.DocumentFactory;
 import org.example.demo1001.model.Document;
+import org.example.demo1001.proxyAccessor.FileAccessor;
+import org.example.demo1001.proxyAccessor.FileAccessorProxy;
 import org.example.demo1001.repository.DocumentRepository;
+import org.example.demo1001.repository.SessionRepo;
 
 import java.awt.*;
 import java.io.File;
@@ -97,9 +100,137 @@ public class AdminManageFilesController implements Initializable {
 
         HBox buttonContainer = createButtonContainer(document);
 
-        fileComponent.getChildren().addAll(nameLabel, typeLabel, dateLabel, buttonContainer);
+        if(!document.isPrivate()){
+            fileComponent.getChildren().addAll(nameLabel, typeLabel, dateLabel, buttonContainer);
+        }
+        else {
+            HBox buttonCon = createPrivateButtonContainer(document);
+            fileComponent.setSpacing(68);
+            fileComponent.getChildren().addAll(nameLabel, typeLabel,dateLabel,buttonCon,buttonContainer);
+
+        }
+
+
         return fileComponent;
     }
+
+    private HBox createPrivateButtonContainer(Document document) {
+        HBox buttonContainer = new HBox(10);
+        buttonContainer.setAlignment(Pos.CENTER_RIGHT);
+        buttonContainer.setSpacing(20);
+
+        Button editButton = createRequestButton(document);
+
+        buttonContainer.getChildren().addAll(editButton);
+        return buttonContainer;
+    }
+    private Button createRequestButton(Document document) {
+        Button editButton = new Button("Private");
+        editButton.setStyle("-fx-font-size: 12px; -fx-background-color: #f44336; -fx-text-fill: #ffffff; -fx-padding: 5px 10px;");
+        editButton.setMaxWidth(Double.MAX_VALUE);
+
+        editButton.setOnAction(event -> openPrivateWindow(document));
+        return editButton;
+    }
+
+    private void openPrivateWindow(Document document) {
+        Stage editWindow = new Stage();
+        editWindow.initModality(Modality.APPLICATION_MODAL);
+        editWindow.setTitle("Private");
+
+        VBox editLayout = new VBox(20);
+        editLayout.setAlignment(Pos.CENTER);
+
+        Button aPublic = new Button("Switch to Public");
+        Button cancle = new Button("cancle");
+
+        aPublic.setStyle("-fx-background-color: #f44336; -fx-text-fill: white; -fx-padding: 5px 10px;");
+        cancle.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 5px 10px;");
+
+        // Handle delete button click
+        aPublic.setOnAction(switchToPublic -> {
+            Alert deleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            deleteAlert.setTitle("are you sure you want to Make this file public ");
+            deleteAlert.setHeaderText("Are you sure want to Make this file public?");
+            deleteAlert.setContentText("This action cannot be undone.");
+
+            Optional<ButtonType> result = deleteAlert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                // Delete the user from repository and remove the UI component
+                DocumentRepository.getInstance().switchToPublic(document.getId() );
+
+                for (Node node : fileContainer.getChildren()) {
+                    if (node instanceof HBox userComponent) {
+
+                        // Check if the ID of the user component matches the user's ID
+                        if (userComponent.getId().equals(String.valueOf(document.getId()))) {
+                            // Find and update the role label
+                            // Assuming it's at index 2
+
+                            // Remove the "Request" button
+                            removePrivateButtonFromUserComponent(document);
+
+                            // Optionally, trigger a UI refresh or re-add the updated user component
+                            break;
+                        }
+                    }
+                }
+                editWindow.close();
+            }
+        });
+
+        cancle.setOnAction(acceptEvent -> {
+            editWindow.close();
+        });
+
+
+        editLayout.getChildren().addAll(aPublic, cancle);
+
+        Scene editScene = new Scene(editLayout, 300, 200);
+        editWindow.setScene(editScene);
+        editWindow.show();
+    }
+    private void removePrivateButtonFromUserComponent(Document document) {
+        // Loop through all document components to find the one matching the document's ID
+        for (Node node : fileContainer.getChildren()) {
+
+            if (node instanceof HBox fileComponent) {
+                // Check if the ID of the document component matches the document's ID
+                if (fileComponent.getId().equals(String.valueOf(document.getId()))) {
+                    // Look through all child nodes of fileComponent to find the 'Request' button container
+                    for (Node childNode : fileComponent.getChildren()) {
+                        if (childNode instanceof HBox buttonContainer) {
+
+                            // Check if the button container contains the "Request" button and remove it
+                            fileComponent.getChildren().remove(3);
+                            fileComponent.setSpacing(110);
+                            break;
+                        }
+                    }
+//                    break; // Exit after processing the correct document component
+                }
+            }
+        }
+    }
+
+
+    private void addPrivateButtonFromUserComponent(Document document) {
+        // Loop through all document components to find the one matching the document's ID
+        for (Node node : fileContainer.getChildren()) {
+
+            if (node instanceof HBox fileComponent) {
+                // Check if the ID of the document component matches the document's ID
+                if (fileComponent.getId().equals(String.valueOf(document.getId()))) {
+                    // Look through all child nodes of fileComponent to find the 'Request' button container
+                    HBox buttonCon = createPrivateButtonContainer(document);
+                    fileComponent.setSpacing(68);
+                    fileComponent.getChildren().add(3,buttonCon);
+//                    break; // Exit after processing the correct document component
+                }
+            }
+        }
+    }
+
 
     private Label createLabel(String text) {
         Label label = new Label(text);
@@ -129,7 +260,7 @@ public class AdminManageFilesController implements Initializable {
         openButton.setPrefWidth(Region.USE_COMPUTED_SIZE);
         openButton.setMaxWidth(Double.MAX_VALUE);
 
-        openButton.setOnAction(event -> openFile(document.getFile()));
+        openButton.setOnAction(event -> openFile(document));
         return openButton;
     }
 
@@ -142,11 +273,14 @@ public class AdminManageFilesController implements Initializable {
         return editButton;
     }
 
-    private void openFile(File file) {
-        if (file != null && file.exists()) {
+    private void openFile(Document document) {
+        FileAccessor fileAccessor = new FileAccessorProxy();
+        document.setFile(fileAccessor.loadFile(document));
+
+        if (document.getFile() != null && document.getFile().exists()) {
             try {
                 Desktop desktop = Desktop.getDesktop();
-                desktop.open(file);  // Opens the file with the default application
+                desktop.open(document.getFile());  // Opens the file with the default application
             } catch (IOException e) {
                 showAlert("Error Opening File", "Unable to open the file: " + e.getMessage());
             }
@@ -164,6 +298,7 @@ public class AdminManageFilesController implements Initializable {
 
         Button deleteButton = new Button("Delete");
         Button changeNameButton = new Button("Change Name");
+        Button switchToPrivate = new Button("Switch To Private");
 
         deleteButton.setStyle("-fx-background-color: #f44336; -fx-text-fill: white; -fx-padding: 5px 10px;");
         changeNameButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 5px 10px;");
@@ -192,8 +327,35 @@ public class AdminManageFilesController implements Initializable {
 
         changeNameButton.setOnAction(changeEvent -> openChangeNameWindow(document));
 
+        switchToPrivate.setOnAction(switchToPrivateEvent->{
+            Alert deleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            deleteAlert.setTitle("are you sure you want to Make this file Private ");
+            deleteAlert.setHeaderText("Are you sure want to Make this file Private?");
+            deleteAlert.setContentText("This action cannot be undone.");
 
-        editLayout.getChildren().addAll(deleteButton, changeNameButton);
+            Optional<ButtonType> result = deleteAlert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                // Delete the user from repository and remove the UI component
+                DocumentRepository.getInstance().switchToPrivate(document.getId());
+
+                for (Node node : fileContainer.getChildren()) {
+                    if (node instanceof HBox userComponent) {
+
+                        // Check if the ID of the user component matches the user's ID
+                        if (userComponent.getId().equals(String.valueOf(document.getId()))) {
+
+                            addPrivateButtonFromUserComponent(document);
+
+                            break;
+                        }
+                    }
+                }
+                editWindow.close();
+            }
+        });
+
+
+        editLayout.getChildren().addAll(deleteButton, changeNameButton,switchToPrivate);
 
         Scene editScene = new Scene(editLayout, 300, 200);
         editWindow.setScene(editScene);
@@ -230,9 +392,10 @@ public class AdminManageFilesController implements Initializable {
 
     private Boolean changeNameEvent(String newName,Document document){
         if (!newName.trim().isEmpty()) {
+            System.out.println("rename "+document.getName()+" to "+newName );
             DocumentRepository.getInstance().changeDocumentName(document,newName);
                 document.setName(newName);
-            updateFileComponentName(document);
+                updateFileComponentName(document);
             return true;
         } else {
             showAlert("Invalid Name", "Name cannot be empty.");
@@ -259,7 +422,7 @@ public class AdminManageFilesController implements Initializable {
 
 
     @FXML
-    protected void onBackToDashboard() {
+    protected void logout() {
         try {
             // Load the dashboard FXML file (make sure the path is correct)
             FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("AdminDashboard.fxml"));
@@ -267,11 +430,12 @@ public class AdminManageFilesController implements Initializable {
 
             // Get the current stage
             Stage stage = (Stage) fileContainer.getScene().getWindow();
-
+            System.out.println("!!!!!!!");
             // Set the new scene (dashboard scene) on the stage
             Scene dashboardScene = new Scene(dashboardRoot);
             stage.setScene(dashboardScene);
             stage.show();
+            SessionRepo.logout();
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Error", "Could not load dashboard: " + e.getMessage());

@@ -1,16 +1,8 @@
 package org.example.demo1001.model;
 
-public abstract class UserRole {
+public abstract class User {
 
     int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     String userName;
     String password;
@@ -18,7 +10,16 @@ public abstract class UserRole {
     boolean pending ;
     String status;
 
-    public UserRole(int id, String userName, String password, String role, String status) {
+
+    public User(UserBuilder builder) {
+        this.id = builder.id;
+        this.userName = builder.userName;
+        this.password = builder.password;
+        this.role = builder.role;
+        this.pending = builder.pending;
+        this.status = builder.status;
+    }
+    public User(int id, String userName, String password, String role, String status) {
         this.id = id;
         this.userName = userName;
         this.password = password;
@@ -26,7 +27,7 @@ public abstract class UserRole {
         this.status = status;
     }
 
-    public UserRole(String userName, String password, String role,String status) {
+    public User(String userName, String password, String role, String status) {
         this.userName = userName;
         this.password = password;
         this.role = role;
@@ -73,5 +74,12 @@ public abstract class UserRole {
 
     public void setRole(String role) {
         this.role = role;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

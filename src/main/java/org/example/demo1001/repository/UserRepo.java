@@ -1,7 +1,7 @@
 package org.example.demo1001.repository;
 
 import org.example.demo1001.factory.UserFactory;
-import org.example.demo1001.model.UserRole;
+import org.example.demo1001.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,7 +29,7 @@ public class UserRepo {
     /**
      * Login method to validate username and password.
      */
-    public boolean login(UserRole user) {
+    public boolean login(User user) {
         String sql = "SELECT * FROM users WHERE user_name = ? AND password = ? AND role=?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, user.getUserName());
@@ -41,6 +41,8 @@ public class UserRepo {
                     if(rs.getString("status").equals("pending")){
                         return false;
                     }
+                    //session start;
+                    SessionRepo.login(UserFactory.getInstance().createUser(rs.getInt("id"),rs.getString("user_name"),rs.getString("password"),rs.getString("role"),rs.getString("status")));
                     System.out.println("Login successful for user: " + user.getUserName());
                     return true;
                 } else {
@@ -57,7 +59,7 @@ public class UserRepo {
      * Register method to add a new user to the database.
      */
 
-    public boolean addAdmin(UserRole user) {
+    public boolean addAdmin(User user) {
         // Check if the role is valid
 
         if(!user.getRole().equalsIgnoreCase("admin")){
@@ -81,7 +83,7 @@ public class UserRepo {
         }
         return false;
     }
-    public boolean register(UserRole user) {
+    public boolean register(User user) {
         // Check if the role is valid
         if (!user.getRole().equalsIgnoreCase("viewer") && !user.getRole().equalsIgnoreCase("editor")) {
             System.err.println("Invalid role: " + user.getRole());
@@ -116,8 +118,8 @@ public class UserRepo {
         return false;
     }
 
-    public List<UserRole> getAllUsers() {
-        List<UserRole> users = new ArrayList<>();
+    public List<User> getAllUsers() {
+        List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM users";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql);
@@ -133,7 +135,7 @@ public class UserRepo {
 
                 // Assuming you have a UserFactory to create User objects
                 UserFactory factory = UserFactory.getInstance();
-                UserRole user = factory.createUser(id, userName, password, role, status);
+                User user = factory.createUser(id, userName, password, role, status);
 
                 users.add(user);
                 System.out.println(user.getUserName() + " fetched");
@@ -144,7 +146,7 @@ public class UserRepo {
         return users;
     }
 
-    public Boolean deleteUser(UserRole userRole){
+    public Boolean deleteUser(User userRole){
         String sql = "DELETE FROM users WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, userRole.getId());
@@ -163,7 +165,7 @@ public class UserRepo {
         }
     }
 
-    public Boolean changeRole(UserRole user, String newRole){
+    public Boolean changeRole(User user, String newRole){
             // Get the current role of the user
             String oldRole = user.getRole();
 
@@ -197,7 +199,7 @@ public class UserRepo {
             return false;
         }
 
-    public Boolean acceptUser(UserRole user){
+    public Boolean acceptUser(User user){
         String sql = "UPDATE users SET status = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, "approved");

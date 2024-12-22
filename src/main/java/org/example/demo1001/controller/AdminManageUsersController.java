@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import org.example.demo1001.AccessControl.UserAccessControl;
 import org.example.demo1001.MainApplication;
 import org.example.demo1001.factory.UserFactory;
-import org.example.demo1001.model.UserRole;
+import org.example.demo1001.model.User;
 import org.example.demo1001.repository.UserRepo;
 
 import java.io.IOException;
@@ -50,7 +50,7 @@ public class AdminManageUsersController implements Initializable {
 
                 // Create a new user object
                 if (!username.trim().isEmpty() && !password.trim().isEmpty()) {
-                    UserRole newUser = UserFactory.getInstance().createUser(username,password,"admin","approved"); // Assuming UserRole constructor with username and password
+                    User newUser = UserFactory.getInstance().createUser(username,password,"admin","approved"); // Assuming UserRole constructor with username and password
                     UserRepo.getInstance().addAdmin(newUser); // Save the user to the database
                     addUserComponent(newUser); // Add the user to the UI
 
@@ -84,13 +84,13 @@ public class AdminManageUsersController implements Initializable {
         alert.showAndWait();
     }
 
-    public void addUserComponent(UserRole user) {
+    public void addUserComponent(User user) {
         HBox userComponent = createUserComponent(user);
         userComponent.setId(String.valueOf(user.getId()));
         userContainer.getChildren().add(userComponent);
     }
 
-    private HBox createUserComponent(UserRole user) {
+    private HBox createUserComponent(User user) {
         HBox userComponent = new HBox(0);
         userComponent.setStyle("-fx-padding: 10; -fx-border-color: lightgray; -fx-border-width: 1; -fx-background-color: #f0f0f0;");
         userComponent.setMinHeight(60);
@@ -129,7 +129,7 @@ public class AdminManageUsersController implements Initializable {
         return label;
     }
 
-    private HBox createButtonContainer(UserRole user) {
+    private HBox createButtonContainer(User user) {
         HBox buttonContainer = new HBox(10);
         buttonContainer.setAlignment(Pos.CENTER_RIGHT);
         buttonContainer.setSpacing(20);
@@ -139,7 +139,7 @@ public class AdminManageUsersController implements Initializable {
         buttonContainer.getChildren().addAll(editButton);
         return buttonContainer;
     }
-    private HBox createRequestButtonContainer(UserRole user) {
+    private HBox createRequestButtonContainer(User user) {
         HBox buttonContainer = new HBox(10);
         buttonContainer.setAlignment(Pos.CENTER_RIGHT);
         buttonContainer.setSpacing(20);
@@ -150,7 +150,7 @@ public class AdminManageUsersController implements Initializable {
         return buttonContainer;
     }
 
-    private Button createEditButton(UserRole user) {
+    private Button createEditButton(User user) {
         Button editButton = new Button("Edit");
         editButton.setStyle("-fx-font-size: 12px; -fx-background-color: #2196F3; -fx-text-fill: white; -fx-padding: 5px 10px;");
         editButton.setMaxWidth(Double.MAX_VALUE);
@@ -158,7 +158,7 @@ public class AdminManageUsersController implements Initializable {
         editButton.setOnAction(event -> openEditWindow(user));
         return editButton;
     }
-    private Button createRequestButton(UserRole user) {
+    private Button createRequestButton(User user) {
         Button editButton = new Button("Request");
         editButton.setStyle("-fx-font-size: 12px; -fx-background-color: #f34e31; -fx-text-fill: white; -fx-padding: 5px 10px;");
         editButton.setMaxWidth(Double.MAX_VALUE);
@@ -167,7 +167,7 @@ public class AdminManageUsersController implements Initializable {
         return editButton;
     }
 
-    private void openEditWindow(UserRole user) {
+    private void openEditWindow(User user) {
         Stage editWindow = new Stage();
         editWindow.initModality(Modality.APPLICATION_MODAL);
         editWindow.setTitle("Edit User");
@@ -209,7 +209,7 @@ public class AdminManageUsersController implements Initializable {
         editWindow.setScene(editScene);
         editWindow.show();
     }
-    private void openRequestWindow(UserRole user) {
+    private void openRequestWindow(User user) {
         Stage editWindow = new Stage();
         editWindow.initModality(Modality.APPLICATION_MODAL);
         editWindow.setTitle("Request");
@@ -285,7 +285,7 @@ public class AdminManageUsersController implements Initializable {
     }
 
 
-    private void removeRequestButtonFromUserComponent(UserRole user) {
+    private void removeRequestButtonFromUserComponent(User user) {
         // Loop through all user components to find the one matching the user's ID
         for (Node node : userContainer.getChildren()) {
             if (node instanceof HBox userComponent) {
@@ -311,7 +311,7 @@ public class AdminManageUsersController implements Initializable {
 
     //change role
 
-    private void openChangeRoleWindow(UserRole user) {
+    private void openChangeRoleWindow(User user) {
         Stage changeRoleWindow = new Stage();
         changeRoleWindow.initModality(Modality.APPLICATION_MODAL);
         changeRoleWindow.setTitle("Change Role");
@@ -353,7 +353,7 @@ public class AdminManageUsersController implements Initializable {
     }
 
 
-    private Boolean changeRoleEvent(String newRole, UserRole user) {
+    private Boolean changeRoleEvent(String newRole, User user) {
         if (!newRole.trim().isEmpty()) {
             UserAccessControl.getInstance().assignRole(user,newRole);
             user.setRole(newRole);
@@ -365,7 +365,7 @@ public class AdminManageUsersController implements Initializable {
         }
     }
 
-    private void updateUserComponentName(UserRole user) {
+    private void updateUserComponentName(User user) {
         // Loop through all user components to find the one matching the user's ID and update it
         for (Node node : userContainer.getChildren()) {
             if (node instanceof HBox) {
@@ -382,7 +382,7 @@ public class AdminManageUsersController implements Initializable {
         }
     }
 
-    private void updateRoleInUI(UserRole user) {
+    private void updateRoleInUI(User user) {
         // Loop through all user components to find the one matching the user's ID and update it
         for (Node node : userContainer.getChildren()) {
             if (node instanceof HBox) {
@@ -423,7 +423,7 @@ public class AdminManageUsersController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         userContainer.setAlignment(Pos.CENTER);
         UserRepo userRepository = UserRepo.getInstance();
-        List<UserRole> userList = userRepository.getAllUsers();
+        List<User> userList = userRepository.getAllUsers();
         userList.forEach(this::addUserComponent);
     }
 }

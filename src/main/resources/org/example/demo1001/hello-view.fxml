@@ -42,11 +42,12 @@
             <Font size="36.0" />
          </font>
       </Label>
+
       <MenuBar layoutX="879.0" layoutY="3.0">
          <menus>
             <Menu mnemonicParsing="false" text="back">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Back to Dashboard" onAction="#onBackToDashboard" />
+                  <MenuItem mnemonicParsing="false" text="Logout" onAction="#logout" />
                </items>
             </Menu>
          </menus>

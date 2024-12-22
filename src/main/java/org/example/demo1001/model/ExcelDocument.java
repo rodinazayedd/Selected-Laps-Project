@@ -11,7 +11,9 @@ public class ExcelDocument extends Document{
     public ExcelDocument(int id, String name, String type, File file, String date) {
         super(id, name, type, file, date);
     }
-
+    public  ExcelDocument(DocumentBuilder documentBuilder){
+        super(documentBuilder);
+    }
     public String getExcelType(){
         return "xlsx";
     }

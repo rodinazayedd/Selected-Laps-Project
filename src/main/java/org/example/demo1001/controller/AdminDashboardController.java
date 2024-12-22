@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import org.example.demo1001.MainApplication;
+import org.example.demo1001.repository.SessionRepo;
 
 import java.io.IOException;
 
@@ -25,6 +26,7 @@ public class AdminDashboardController {
      */
     public void handleLogout(ActionEvent event) {
         navigateTo("LoginPage.fxml", event);
+        SessionRepo.logout();
     }
 
     /**

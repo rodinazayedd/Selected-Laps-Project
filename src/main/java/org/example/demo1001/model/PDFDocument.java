@@ -19,4 +19,9 @@ public class PDFDocument extends Document{
     public void open() {
 
     }
+
+    //builder
+    public PDFDocument(DocumentBuilder documentBuilder){
+        super(documentBuilder);
+    }
 }

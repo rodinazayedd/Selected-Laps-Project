@@ -4,11 +4,55 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5116f5dc-a5b2-4e0b-9711-5d7ebe146657" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/AccessControl/UserAccessControl.java" afterDir="false" />
+    <list default="true" id="5116f5dc-a5b2-4e0b-9711-5d7ebe146657" name="Changes" comment="project-done-2">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/DocumentBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/UserBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/proxyAccessor/FileAccessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/proxyAccessor/FileAccessorProxy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/proxyAccessor/RealFileAccessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/repository/SessionRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/AccessControl/UserAccessControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/AccessControl/UserAccessControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/controller/AdminDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/controller/AdminDashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/controller/AdminManageFilesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/controller/AdminManageFilesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/controller/AdminManageUsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/controller/AdminManageUsersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/controller/EditorViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/controller/EditorViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/controller/LoginPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/controller/LoginPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/controller/ViewerViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/controller/ViewerViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/factory/DocumentFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/factory/DocumentFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/factory/UserFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/factory/UserFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/AdminRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/Document.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/EditorRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/Editor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/ExcelDocument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/ExcelDocument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/PDFDocument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/PDFDocument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/ViewerRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/Viewer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/WordDocument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/model/WordDocument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/repository/DocumentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/repository/DocumentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1001/repository/UserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1001/repository/UserRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/demo1001/editor-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/demo1001/editor-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/demo1001/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/demo1001/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/demo1001/viewer-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/demo1001/viewer-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/MainApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo1001/MainApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/controller/AdminManageFilesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo1001/controller/AdminManageFilesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/controller/AdminManageUsersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo1001/controller/AdminManageUsersController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/controller/EditorViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo1001/controller/EditorViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/controller/LoginPageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo1001/controller/LoginPageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/controller/ViewerViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo1001/controller/ViewerViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/factory/DocumentFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo1001/factory/DocumentFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/factory/UserFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo1001/factory/UserFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/model/AdminRole.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/model/Document.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo1001/model/Document.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/model/EditorRole.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/model/ExcelDocument.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo1001/model/ExcelDocument.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/model/PDFDocument.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo1001/model/PDFDocument.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/model/UserRole.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/model/ViewerRole.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/model/WordDocument.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo1001/model/WordDocument.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/repository/DocumentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo1001/repository/DocumentRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo1001/repository/UserRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo1001/repository/UserRepo.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +63,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -71,10 +116,15 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.example.demo1001.builder" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\spring-course\demo1001\src\main\java\org\example\demo1001\saved_files" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.example.demo1001.model" />
+      <recent name="org.example.demo1001.model.builder" />
       <recent name="org.example.demo1001.controller" />
     </key>
   </component>
@@ -107,7 +157,8 @@
       <workItem from="1734719231806" duration="672000" />
       <workItem from="1734719927989" duration="32000" />
       <workItem from="1734719974312" duration="4210000" />
-      <workItem from="1734818820393" duration="3823000" />
+      <workItem from="1734818820393" duration="29498000" />
+      <workItem from="1734884694211" duration="2185000" />
     </task>
     <task id="LOCAL-00001" summary="project-done">
       <option name="closed" value="true" />
@@ -133,7 +184,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734720003574</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="project-done-2">
+      <option name="closed" value="true" />
+      <created>1734825253967</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1734825253967</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,7 +213,19 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="project-done" />
     <MESSAGE value="project-done-" />
-    <option name="LAST_COMMIT_MESSAGE" value="project-done-" />
+    <MESSAGE value="project-done-2" />
+    <option name="LAST_COMMIT_MESSAGE" value="project-done-2" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/demo1001/repository/DocumentRepository.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -19,4 +19,11 @@ public class WordDocument extends Document{
     public void open() {
 
     }
+
+    //builder
+    public WordDocument(DocumentBuilder documentBuilder){
+        super(documentBuilder);
+        System.out.println("word2"+documentBuilder.isPrivate);
+        System.out.println("word"+this.isPrivate);
+    }
 }

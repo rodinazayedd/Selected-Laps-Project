@@ -45,11 +45,12 @@
                 <Font size="39.0" />
             </font>
         </Label>
+
         <MenuBar layoutX="879.0" layoutY="3.0">
             <menus>
                 <Menu mnemonicParsing="false" text="back">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Logout" onAction="#onBackToLogin" />
+                        <MenuItem mnemonicParsing="false" text="Logout" onAction="#logout" />
                     </items>
                 </Menu>
             </menus>
